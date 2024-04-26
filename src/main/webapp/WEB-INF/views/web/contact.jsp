@@ -116,18 +116,26 @@
                 </div>
                 <div class="col-12 col-md-6">
                     <h2 class="title-lienhe"><strong>Liên hệ với chúng tôi</strong></h2>
-                    <form>
+                    <form id="formCustomer" method="get" action="">
                         <div class="row">
                             <div class="col">
-                                <input type="text" class="form-control" placeholder="Họ và tên">
+                                <input name="fullName" class="form-control" placeholder="Họ và tên" type="text"/>
                             </div>
                             <div class="col">
-                                <input type="text" class="form-control" placeholder="Email">
+                                <input name="email" class="form-control" placeholder="Email" type="text"/>
                             </div>
                         </div>
-                        <input type="text" class="form-control mt-3" placeholder="Số điện thoại">
-                        <input type="text" class="form-control mt-3" placeholder="Nội dung">
-                        <button class="btn btn-primary px-4 mt-3">
+                        <div class="row mt-2">
+                            <div class="col">
+                                <input name="phone" class="form-control" placeholder="Số điện thoại" type="text"/>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col">
+                                <input name="note" class="form-control" placeholder="Nội dung" type="text"/>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary px-4 mt-3" type="button" id="btnAddCustomer">
                             Gửi liên hệ
                         </button>
                     </form>
@@ -158,7 +166,7 @@
                             </div>
                             <div class="col-12 col-md-4 text-center">
                                 <div class="icon-footer">
-                                    <img src="https://bizweb.dktcdn.net/100/328/362/themes/894751/assets/place_phone.png?1676257083798 alt="">
+                                    <img src="https://bizweb.dktcdn.net/100/328/362/themes/894751/assets/place_phone.png?1676257083798" alt="" />
                                 </div>
                                 <div class="content-center-footer">
                                     <p class="mb-1 mt-3">Hotline</p>
@@ -233,6 +241,45 @@
         </div>
     </footer>
 </div>
+<script>
+    document.getElementById("btnAddCustomer").addEventListener("click", function(e) {
+        e.preventDefault();
+        let data = {};
+        let formData = $('#formCustomer').serializeArray();
+        $.each(formData, function(i, v){
+            data['' + v.name + ""] = v.value;
+        });
+        data['status'] = 'CHUA_XL';
+        if(data.fullName === '') {
+            back("Bạn chưa nập họ tên.");
+        } else if(data.phone === '') {
+            back("Bạn chưa nhập số điện thoại.")
+        } else {
+            addCustomer(data);
+        }
+    });
+    function back(text) {
+        alert(text)
+    }
+    function addCustomer(data) {
+        $.ajax({
+            type: "POST",
+            url: "/api/customer",
+            data: JSON.stringify(data),
+            contentType: "application/json",
+            dataType: 'json',
+            success: function(){
+                alert("Gửi liên hệ thành công!");
+                location.reload(true);
+            },
+            error: function(respond) {
+                console.log("failed");
+                alert("Thất bại! Vui lòng thử lại sau.");
+                console.log(respond);
+            }
+        });
+    }
+</script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 </body>

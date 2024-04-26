@@ -1,5 +1,7 @@
 package com.javaweb.entity;
 
+import org.hibernate.annotations.ColumnDefault;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,8 +24,8 @@ public class CustomerEntity extends BaseEntity{
     private String demand;
     @Column(name = "status")
     private String status;
-    @Column(name = "is_active", nullable = false)
-    private Long isActive;
+    @Column(name = "is_active")
+    private Long isActive = 1L;
 
     @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE}, orphanRemoval = true)
     private List<TransactionEntity> transactionEntities = new ArrayList<>();

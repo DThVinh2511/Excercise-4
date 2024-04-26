@@ -102,13 +102,11 @@ public class CustomerService implements ICustomerService {
         CustomerEntity customerEntity = customerConverter.toCustomerEntity(customerDTO);
         if(customerDTO.getId() != null) {
             CustomerEntity customer = customerRepository.findById(customerDTO.getId()).get();
-            customerEntity.setIsActive(customer.getIsActive());
+//            customerEntity.setIsActive(customer.getIsActive());
             customerEntity.setStaffList(customer.getStaffList());
             customerEntity.setCreatedBy(customer.getCreatedBy());
             customerEntity.setCreatedDate(customer.getCreatedDate());
             customerEntity.setTransactionEntities(customer.getTransactionEntities());
-        } else {
-            customerEntity.setIsActive(1L);
         }
         customerRepository.save(customerEntity);
     }

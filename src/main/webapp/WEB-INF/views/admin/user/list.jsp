@@ -142,18 +142,13 @@
                                         <display:column headerClass="text-left" property="userName" title="Tên"/>
                                         <display:column headerClass="text-left" property="fullName" title="full name"/>
                                         <display:column headerClass="col-actions" title="Thao tác">
-                                            <c:if test="${tableList.roleCode != 'MANAGER'}">
-                                                <security:authorize access="hasRole('MANAGER')">
-                                                    <a class="btn btn-sm btn-primary btn-edit" data-toggle="tooltip"
-                                                       title="Cập nhật người dùng"
-                                                       href='<c:url value="/admin/user-edit-${tableList.id}"/>'>
-                                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                                                    </a>
-                                                </security:authorize>
-                                            </c:if>
-                                            <c:if test="${tableList.roleCode == 'MANAGER'}">
-                                                <p>Không đươc thao tác</p>
-                                            </c:if>
+                                            <security:authorize access="hasRole('MANAGER')">
+                                                <a class="btn btn-sm btn-primary btn-edit" data-toggle="tooltip"
+                                                   title="Cập nhật người dùng"
+                                                   href='<c:url value="/admin/user-edit-${tableList.id}"/>'>
+                                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                                </a>
+                                            </security:authorize>
                                         </display:column>
                                     </display:table>
                                 </div>

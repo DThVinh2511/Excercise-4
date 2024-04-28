@@ -102,37 +102,8 @@
                             <i class="orange ace-icon fa fa-location-arrow bigger-110"></i>Thêm
                         </button>
                     </div>
+
                     <c:if test="${item.key == 'CSKH'}">
-                        <div class="col-xs-12">
-                            <table class="table table-striped table-bordered table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>Ngày tạo</th>
-                                        <th>Người tạo</th>
-                                        <th>Ngày sửa</th>
-                                        <th>Người sửa</th>
-                                        <th>Chi tiết giao dịch</th>
-                                        <th>Thao tác</th>
-                                    </tr>
-                                </thead>
-                                <c:forEach var="it" items="${transactionCSKH}">
-                                    <tbody>
-                                        <td>${it.createdDate}</td>
-                                        <td>${it.createdBy}</td>\
-                                        <td>${it.modifiedDate}</td>
-                                        <td>${it.modifiedBy}</td>
-                                        <td>${it.note}</td>
-                                        <td>
-                                            <button class="btn btn-xs btn-info" title="Sửa thông tin giao dịch" onclick="updateTransaction(${it.id}, '${it.note}')">
-                                                <i class="ace-icon fa fa-pencil bigger-120"></i>
-                                            </button>
-                                        </td>
-                                    </tbody>
-                                </c:forEach>
-                            </table>
-                        </div>
-                    </c:if>
-                    <c:if test="${item.key == 'DDX'}">
                         <div class="col-xs-12">
                             <table class="table table-striped table-bordered table-hover">
                                 <thead>
@@ -144,6 +115,36 @@
                                     <th>Chi tiết giao dịch</th>
                                     <th>Thao tác</th>
                                 </tr>
+                                </thead>
+                                <c:forEach var="it" items="${transactionCSKH}">
+                                    <tbody>
+                                    <td>${it.createdDate}</td>
+                                    <td>${it.createdBy}</td>
+                                    <td>${it.modifiedDate}</td>
+                                    <td>${it.modifiedBy}</td>
+                                    <td>${it.note}</td>
+                                    <td>
+                                        <button class="btn btn-xs btn-info" title="Sửa thông tin giao dịch" onclick="updateTransaction(${it.id}, '${it.note}')">
+                                            <i class="ace-icon fa fa-pencil bigger-120"></i>
+                                        </button>
+                                    </td>
+                                    </tbody>
+                                </c:forEach>
+                            </table>
+                        </div>
+                    </c:if>
+                    <c:if test="${item.key == 'DDX'}">
+                        <div class="col-xs-12">
+                            <table class="table table-striped table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Ngày tạo</th>
+                                        <th>Người tạo</th>
+                                        <th>Ngày sửa</th>
+                                        <th>Người sửa</th>
+                                        <th>Chi tiết giao dịch</th>
+                                        <th>Thao tác</th>
+                                    </tr>
                                 </thead>
                                 <c:forEach var="it" items="${transactionDDX}">
                                     <tbody>

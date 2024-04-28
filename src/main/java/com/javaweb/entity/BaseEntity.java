@@ -36,6 +36,12 @@ public class BaseEntity implements Serializable {
     @LastModifiedBy
     private String modifiedBy;
 
+    @PrePersist
+    public void prePersist() {
+        this.modifiedBy = null;
+        this.modifiedDate = null;
+    }
+
     public Long getId() {
         return id;
     }
